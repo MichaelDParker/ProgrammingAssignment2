@@ -1,0 +1,94 @@
+---
+title: "cacheSolve test"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## GitHub Documents
+
+The following code can be used to test my makeCacheMatrix() and cacheSolve() functions: 
+
+#Code lines for Matrix testing
+
+## Matrix results
+
+Michael Parker Matrix example:
+
+```{}
+x<-matrix(rnorm(4),2,2)         #creates simple square matrix
+y<-matrix(rnorm(16),4,4)
+ax<-makeMatrix(y)               #assigns the 4 by 4 matrix to ax
+ax$get()                        #confirm setter works.
+ax$getinverse()                 #returns NULL
+ax                              #returns list describing the methods
+```
+#Code lines for Cache testing
+
+## Cache results
+
+Michael Parker Cache example:
+
+```{}
+ax<-makeMatrix(x)               #assigns the 2 by 2 matrix to ax
+ax$get()                        #confirm setter works.
+ax$getinverse()                 #returns NULL
+cacheSolve(ax)                  #returns the inverse of the matrix
+#ax$setinverse(y)
+#ax$getinverse()
+ax2<-makeMatrix(cacheSolve(ax)) 
+ax2$getinverse()
+cacheSolve(ax2)  
+```
+#Test Class for testing
+
+## three sections:
+Test the makeCacheMatrix
+Test cacheSolve
+Test if inverting the insion yeilds the original matrix
+
+Michael Parker Cache example:
+```{}
+#test class for week 3 assignment
+testMakeCacheMatrix <- function(){
+        #matrix test
+        x<-matrix(rnorm(4),2,2) 
+        y<-matrix(rnorm(16),4,4)
+        print("X:")
+        print(x)
+        print("Y:")
+        print(y)
+        ax<-makeMatrix(y)
+        print("get() should show y")
+        print(ax$get())
+        print("getinverse() should show NULL")
+        print(ax$getinverse())
+        ax$setinverse(x)
+        print("test setinverse function with X matrix and call getinverse ")
+        print(ax$getinverse())
+        print(ax)   
+        
+        #cache test
+        ax2<-makeMatrix(x)
+        print("test cachesolve with x matrix")
+        print("get()")
+        print(ax2$get())
+        print("getinverse")
+        print(ax2$getinverse())
+        print("cachsolve")
+        print(cacheSolve(ax2))
+        
+        ax3<-makeMatrix(cacheSolve(ax2))
+        print("get() another matrix based on inverse")
+        print(ax3$get())
+        print("getinverse()")
+        print(ax3$getinverse())
+        print("cachsolve, first not cached next cached")
+        print(cacheSolve(ax3))
+        print(cacheSolve(ax3))
+        
+```
+
+Thank you for your review.
